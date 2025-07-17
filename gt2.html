@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT Mall - Toys & Gadgets Store</title>
+    <link rel="stylesheet" href="gt2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Fixed Sticky Navbar -->
+    <nav class="navbar-fixed">
+        <div class="container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>GT Mall
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search for toys and gadgets..." class="search-input">
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <button class="search-btn">Search</button>
+                    </div>
+                </div>
+
+                <!-- Login Section -->
+                <div class="auth-section">
+                    <button class="login-btn">
+                        <i class="fas fa-user"></i>
+                        Login
+                    </button>
+                    <button class="signup-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Sign Up
+                    </button>
+                    <button class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="categories">
+                <div class="categories-content">
+                    <button class="category-btn">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Toys</span>
+                    </button>
+                    <button class="category-btn">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Gadgets</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to GT Mall</h1>
+                    <p>Your one-stop destination for amazing toys and cutting-edge gadgets</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary">Shop Toys</button>
+                        <button class="btn-secondary">Shop Gadgets</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="featured-categories">
+            <div class="container">
+                <h2>Shop by Category</h2>
+                <div class="categories-grid">
+                    <!-- Toys Category -->
+                    <div class="category-card toys-card">
+                        <div class="category-icon">🧸</div>
+                        <h3>Toys</h3>
+                        <p>Discover amazing toys for kids of all ages. From educational toys to fun games!</p>
+                        <button class="category-card-btn toys-btn">Browse Toys</button>
+                    </div>
+
+                    <!-- Gadgets Category -->
+                    <div class="category-card gadgets-card">
+                        <div class="category-icon">📱</div>
+                        <h3>Gadgets</h3>
+                        <p>Latest tech gadgets and electronics. Stay ahead with cutting-edge technology!</p>
+                        <button class="category-card-btn gadgets-btn">Browse Gadgets</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon shipping-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Fast Shipping</h3>
+                        <p>Quick delivery to your doorstep</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon security-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure Shopping</h3>
+                        <p>Your data is safe with us</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon support-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>We're here to help anytime</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>GT Mall
+                    </div>
+                    <p>Your trusted destination for quality toys and innovative gadgets. Making shopping fun and easy!</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Toys</a></li>
+                        <li><a href="#">Gadgets</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>support@gtmall.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Shopping St, Mall City</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 GT Mall. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="gt2.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9605f838c47d7a04',t:'MTc1MjcxNTc4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+5
