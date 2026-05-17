@@ -195,7 +195,7 @@ app.post("/api/cashfree/create-order", userFromHeaders, async (req, res) => {
       },
       order_meta: {
         // Cashfree will replace {order_id} with actual order id
-        return_url: "https://gtmall.run.place/checkout.html?cf_order_id={order_id}",
+        return_url: "https://gtmall.co.in/checkout.html?cf_order_id={order_id}",
       },
     };
 
