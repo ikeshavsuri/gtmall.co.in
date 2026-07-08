@@ -80,10 +80,11 @@ async function handleCashfreeReturn(cfOrderId) {
     const orderIdSpan = document.getElementById("successOrderId");
     if (orderIdSpan) {
       orderIdSpan.textContent =
-        data.order._id ||
-        data.order.paymentId ||
-        data.order.razorpayOrderId ||
-        String(cfOrderId);
+      data.order.trackingId ||
+      data.order.cashfreeOrderId ||
+      data.order.paymentId ||
+      data.order._id ||
+      String(cfOrderId);
     }
 
     const modalEl = document.getElementById("orderSuccessModal");

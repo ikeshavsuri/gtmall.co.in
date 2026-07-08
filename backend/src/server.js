@@ -17,7 +17,16 @@ import { userFromHeaders, requireAdmin } from "./middleware_auth.js";
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://www.gtmall.co.in",
+      "http://localhost:5500",
+      "http://127.0.0.1:5500"
+    ],
+    credentials: true
+  })
+);
 app.use(express.json());
 // existing singular routes agar already hain to unko rehne do
 // === SINGULAR ===
@@ -191,11 +200,14 @@ app.post("/api/cashfree/create-order", userFromHeaders, async (req, res) => {
         customer_id: user.id || user.email || "guest",
         customer_name: user.name || user.email || "Guest",
         customer_email: user.email || "",
-        customer_phone: customerPhone || "",
+        customer_phone:
+        customerPhone && customerPhone.length === 10
+        ? customerPhone
+        : "9999999999",
       },
       order_meta: {
         // Cashfree will replace {order_id} with actual order id
-        return_url: "https://gtmall.co.in/checkout.html?cf_order_id={order_id}",
+        return_url: "https://www.gtmall.co.in/checkout.html?cf_order_id={order_id}",
       },
     };
 
@@ -292,8 +304,8 @@ app.post("/api/cashfree/confirm", userFromHeaders, async (req, res) => {
       amount: totalAmount,
       paymentStatus: "paid",
       paymentId: orderInfo.cf_order_id || "",
-      razorpayOrderId: orderInfo.order_id || "",
-      razorpaySignature: "", // not used for Cashfree
+      cashfreeOrderId: orderInfo.order_id || "",
+      cashfreePaymentId: "", // not used for Cashfree
       address,
       status: "Processing",
     });
@@ -467,7 +479,7 @@ app.get("/api/address", userFromHeaders, async (req, res) => {
 });
 
 // ---------------------------
-//  ORDERS (user side)
+//  ORDERS (Cashfree)
 // ---------------------------
 app.post("/api/orders", userFromHeaders, async (req, res) => {
   try {
@@ -475,54 +487,85 @@ app.post("/api/orders", userFromHeaders, async (req, res) => {
       items,
       amount,
       address,
-      razorpay_payment_id,
-      razorpay_order_id,
-      razorpay_signature,
+      cfOrderId,
+      cashfreeOrderId,
+      cashfreePaymentId,
+      paymentStatus,
     } = req.body || {};
 
     if (!Array.isArray(items) || !items.length) {
-      return res.status(400).json({ message: "No items in order" });
+      return res.status(400).json({
+        message: "No items in order",
+      });
     }
 
     const orderDoc = await Order.create({
       userId: req.user.id,
       userEmail: req.user.email,
+
       items: items.map((i) => ({
         productId: i.id?.toString?.() || i.productId || "",
         name: i.name,
-        price: i.price,
-        quantity: i.quantity || 1,
+        price: Number(i.price),
+        quantity: Number(i.quantity || 1),
         image: i.img || i.image || "",
       })),
-      amount,
-      paymentStatus: "paid",
-      paymentId: razorpay_payment_id,
-      razorpayOrderId: razorpay_order_id,
-      razorpaySignature: razorpay_signature,
+
+      amount: Number(amount),
+
+      paymentStatus: paymentStatus || "paid",
+
+      paymentId: cashfreePaymentId || "",
+
+      cashfreeOrderId:
+        cashfreeOrderId || cfOrderId || "",
+
       address,
+
       status: "Processing",
     });
 
-    return res.json(orderDoc);
+    return res.json({
+      success: true,
+      order: orderDoc,
+    });
+
   } catch (err) {
     console.error("POST /api/orders error:", err);
-    return res.status(500).json({ message: "Failed to place order" });
+    return res.status(500).json({
+      message: "Failed to place order",
+    });
   }
 });
 
 
-// GET /api/orders/mine  -> list of orders for current user (used in my_orders.html)
+// GET Orders of Current User
 app.get("/api/orders/mine", userFromHeaders, async (req, res) => {
   try {
-    const user = req.user;
-    if (!user || !user.id) {
-      return res.status(401).json({ message: "Not logged in" });
+
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        message: "Not logged in",
+      });
     }
-    const orders = await Order.find({ userId: user.id }).sort({ createdAt: -1 });
-    return res.json(orders);
+
+    const orders = await Order.find({
+      userId: req.user.id,
+    }).sort({
+      createdAt: -1,
+    });
+
+    return res.json({
+      success: true,
+      orders,
+    });
+
   } catch (err) {
     console.error("GET /api/orders/mine error:", err);
-    return res.status(500).json({ message: "Failed to load orders" });
+
+    return res.status(500).json({
+      message: "Failed to load orders",
+    });
   }
 });
 

@@ -56,10 +56,10 @@ const orderSchema = new mongoose.Schema(
     paymentId: {
       type: String,
     },
-    razorpayOrderId: {
+    cashfreeOrderId: {
       type: String,
     },
-    razorpaySignature: {
+    cashfreePaymentId: {
       type: String,
     },
     address: {
