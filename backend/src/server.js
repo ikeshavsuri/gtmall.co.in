@@ -17,16 +17,37 @@ import { userFromHeaders, requireAdmin } from "./middleware_auth.js";
 connectDB();
 
 const app = express();
+
+const allowedOrigins = [
+  "https://gtmall.co.in",
+  "https://www.gtmall.co.in",
+  "http://localhost:5500",
+  "http://127.0.0.1:5500"
+];
+
 app.use(
   cors({
-    origin: [
-      "https://www.gtmall.co.in",
-      "http://localhost:5500",
-      "http://127.0.0.1:5500"
-    ],
-    credentials: true
+    origin: function (origin, callback) {
+      // Allow server-to-server requests and allowed browser origins
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.error("CORS blocked origin:", origin);
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "x-user-id",
+      "x-user-email",
+      "x-user-name"
+    ]
   })
 );
+
 app.use(express.json());
 // existing singular routes agar already hain to unko rehne do
 // === SINGULAR ===
